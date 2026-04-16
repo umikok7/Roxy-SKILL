@@ -75,7 +75,7 @@
 发布到 GitHub 后可使用：
 
 ```bash
-npx skills add <your-github-id>/roxy-skill
+npx skills add umikok7/roxy-skill
 ```
 
 ---
