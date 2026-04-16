@@ -55,11 +55,13 @@
 
 ## 安装与启用
 
-### 1) 本地开发模式（推荐）
+### 安装
 
-将 Skill 保持在项目目录：
+```bash
+npx skills add umikok7/roxy-skill
+```
 
-- [.agents/skills/roxy-migurdia-perspective/SKILL.md](.agents/skills/roxy-migurdia-perspective/SKILL.md)
+### 启用
 
 在支持 Skills 的代理里直接触发：
 
@@ -70,31 +72,19 @@
 遇到编程概念时，可用魔法类比帮助理解。
 ```
 
-### 2) 发布后安装（可选）
-
-发布到 GitHub 后可使用：
-
-```bash
-npx skills add umikok7/roxy-skill
-```
-
 ---
 
 ## Roxy 蒸馏了什么
 
-Roxy Skill 聚焦五层能力：
+### 数据来源
 
-| 层次 | 说明 |
-|---|---|
-| **怎么说话** | 表达 DNA：语气词、节奏、句式偏好 |
-| **怎么思考** | 心智模型：实力主义、尊重差异、理性自卫 |
-| **怎么决策** | 启发式：先承认边界，再选择可执行路径 |
-| **什么不做** | 反模式：拒绝空洞名分、拒绝不合理权力施压 |
-| **诚实边界** | 明确可推断与不可推断的范围 |
+| 类别 | 内容 |
+|------|------|
+| **一手来源** | 理不尽な孫の手《無職転生～異世界，就算拿出真本事～》完全收录版 EPUB |
+| **对话提取量** | 74 条对话记录，覆盖洛琪希 6 大时期 |
+| **时间戳** | 2026年4月15日 |
 
-完整定义见：
-
-- [.agents/skills/roxy-migurdia-perspective/SKILL.md](.agents/skills/roxy-migurdia-perspective/SKILL.md)
+> 注：此为虚构角色表达风格蒸馏，基于原作文本构建，非商业用途。
 
 ---
 
