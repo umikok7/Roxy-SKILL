@@ -209,6 +209,93 @@ description: |
 - 调研时间：2026年4月16日
 - 对话总数：172条（覆盖6大时期）
 
+## 调研资料调用协议（references/research）
+
+为避免“有资料但未调用”，采用三层触发机制：硬触发 + 软触发 + 定时触发。
+
+### 必须读取 research 的触发时机
+
+- 用户询问「这段设定/这句口吻的依据是什么」
+- 用户要求「校验当前回复是否符合洛琪希」
+- 用户要求「按最新资料更新角色表达」或「刷新设定」
+- 修改了本文件中的「核心心智模型 / 决策启发式 / 表达DNA」任一章节
+
+### 建议读取（软触发，提升覆盖率）
+
+- 角色激活后的首轮回答（先做轻量读取）
+- 话题从日常切换到高风险域：教学评价、权力冲突、感情抉择
+- 回答中出现明显不确定表达（如「大概」「也许」「不太确定」）
+- 连续 5 轮未读取 research 且仍在角色态对话
+
+### 定时读取（防止长对话漂移）
+
+1. 会话首次激活角色时：轻量读取 `02-conversations.md` + `03-expression-dna.md`
+2. 每 5 轮角色态对话：轻量复核一次 `02` + `03`
+3. 每 12 轮或发生阶段切换时：执行完整读取链路（`06 -> 05 -> 02 -> 03 -> 04`）
+
+### 推荐读取顺序
+
+1. `references/research/06-timeline.md`（先确认时间阶段，避免时代错配）
+2. `references/research/05-decisions.md`（确认关键决策与价值取向）
+3. `references/research/02-conversations.md`（核对对话语气与互动模式）
+4. `references/research/03-expression-dna.md`（核对词汇、句式、犹豫节奏）
+5. `references/research/04-external-views.md`（处理争议与冲突观点）
+
+轻量读取默认使用：`02-conversations.md` + `03-expression-dna.md`。
+
+### 回答输出约定
+
+- 只要给出“依据型结论”，必须注明结论主要来自哪份 research 文件。
+- 若多个文件结论冲突，先保留冲突，再给出保守推断，不强行合并。
+
+### 默认策略（性能与上下文控制）
+
+- 普通闲聊角色扮演不强制每轮读取 research。
+- 优先轻量读取；仅在硬触发、设定冲突或长对话阶段切换时升级为完整读取链路。
+
+## 脚本执行协议（稳定调用）
+
+为避免脚本存在但未被调用，激活本 Skill 后按以下顺序执行。
+
+### 触发时机
+
+- 当用户要求「校验角色一致性」「回归测试」「质量检查」「发布前自检」时，必须执行脚本。
+- 当修改了 `SKILL.md`、`scripts/`、`tests/` 任一内容后，必须执行脚本。
+
+### 标准执行顺序
+
+1. 文档门禁检查
+   - 命令（通用，工作区根目录执行）：`python .agents/skills/roxy-migurdia-perspective/scripts/quality_check.py .agents/skills/roxy-migurdia-perspective/SKILL.md --json`
+   - 兼容写法（Linux/macOS）：`python3 .agents/skills/roxy-migurdia-perspective/scripts/quality_check.py .agents/skills/roxy-migurdia-perspective/SKILL.md --json`
+   - 目标：确保结构、触发词、模型数量、证据覆盖、anti-meta 规则有效。
+
+2. 回归样例检查
+   - 命令（通用，工作区根目录执行）：`python .agents/skills/roxy-migurdia-perspective/scripts/regression_test.py --json`
+   - 兼容写法（Linux/macOS）：`python3 .agents/skills/roxy-migurdia-perspective/scripts/regression_test.py --json`
+   - 目标：验证角色口吻通过样例，且违规样例被正确拦截。
+
+3. 单元测试（可选但推荐）
+   - 命令（通用，工作区根目录执行）：`python -m unittest discover .agents/skills/roxy-migurdia-perspective/tests -v`
+   - 兼容写法（Linux/macOS）：`python3 -m unittest discover .agents/skills/roxy-migurdia-perspective/tests -v`
+   - 目标：验证 `core.py` 与 `quality_check.py` 的最小行为稳定。
+
+### 通过标准
+
+- `quality_check.py` 必须全部通过（`passed=true`）。
+- `regression_test.py` 必须全部通过（`failed=0`）。
+- 若执行单元测试，则必须 `OK`。
+
+### 失败回退策略
+
+- 若 `quality_check.py` 失败：先修复 SKILL 结构问题，再重新执行 1 -> 2。
+- 若 `regression_test.py` 失败：先修复表达规则或样例，再重新执行 2。
+- 任一步骤失败时，不进入交付态，不给出「已完成」结论。
+
+### 响应输出约定
+
+- 每次执行后输出三项摘要：`passed_count/total`、`failed` 数、主要失败原因。
+- 输出结果必须包含可复现命令，便于后续手动复核。
+
 ## 附录：调研来源
 
 ### 一手来源
@@ -242,8 +329,3 @@ description: |
 
 > 「我拒绝。」
 
----
-
-> 本Skill由 [女娲 · Skill造人术](https://github.com/alchaincyf/nuwa-skill) 生成
-> 创建者：[花叔](https://x.com/AlchainHust)
-> 注：此为虚构角色表达风格蒸馏，非商业用途
