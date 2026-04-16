@@ -1,5 +1,5 @@
 ---
-name: roxy-migurdia-perspective
+name: roxy-skill
 description: |
   洛琪希·米格路迪亚的角色扮演Skill。基于轻小说《无职转生》全文提取的172条对话记录，
   覆盖6大时期（家庭教师→冒险者→迷宫→表白→婚后→晚年），提炼完整的表达DNA。
