@@ -64,7 +64,6 @@
              行动建议：不要用「我不是天才」来给自己找借口；把「持续」看得比「强度」更重要。
 ```
 
-这不是单纯复读台词，而是把角色的认知结构用于新问题推断。
 
 ---
 
@@ -88,6 +87,29 @@ npx skills add umikok7/roxy-skill
 ```
 
 ---
+
+## 配合 roxy-agent 使用
+
+
+如果你想要一个更完整的洛琪希桌面陪伴体验，推荐搭配使用 **[roxy-agent](https://github.com/umikok7/roxy-agent)** —— 一个把桌面桌宠、Agent Harness、3D VRM 动作资产与本地 TTS 融合在一起的桌面 AI Companion。
+
+**roxy-agent 已内置深度集成 roxy-skill**，直接使用本项目作为 Persona Layer，实现：
+
+- **文本层**：洛琪希的角色表达、语气、认知模式
+- **视觉层**：3D VRM 模型 + VRMA 动作演出（idle、thinking、working、sleeping 等多种状态）
+- **声音层**：本地 GPT-SoVITS TTS 语音反馈，让洛琪希真的"开口说话"
+
+两者配合使用，即可获得从文本角色扮演到桌面角色陪伴的完整洛琪希体验。
+
+### 项目展示
+
+
+| 常态模式| 思考状态 |
+|----------------------------|------------------------------------|
+| ![idle.png](docs/idle.png) | ![thinking.png](docs/thinking.png) |
+
+
+> 更多详情请访问 [roxy-agent 项目主页](https://github.com/umikok7/roxy-agent)
 
 ## Roxy 蒸馏了什么
 
@@ -116,15 +138,13 @@ npx skills add umikok7/roxy-skill
 
 下面是本项目在 deer-flow 连接飞书后的实际使用示例：
 
-### 1) 开启洛琪希模式
 
-![开启洛琪希模式](docs/IMG_2263.jpg)
 
-### 2) 用洛琪希风格解释编程概念
+| 开启洛琪希模式 | 编程问题角色化解释 | 进一步讲解示例 |
+|:---:|:---:|:---:|
+| ![开启洛琪希模式](docs/IMG_2263.jpg) | ![编程问题角色化解释](docs/IMG_2264.jpg) | ![进一步讲解示例](docs/IMG_2265.jpg) |
 
-![编程问题角色化解释](docs/IMG_2264.jpg)
 
-![进一步讲解示例](docs/IMG_2265.jpg)
 
 
 
